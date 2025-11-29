@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Nouvelle Partie</title>
+<link rel="stylesheet" href="../css/score.css">
+</head>
+<body>
+
+<h1>score</h1>
+<div id="preneur"></div>
+<div id="contrat">
+<form id="formContrat">
+  <label><input type="radio" name="contrat" value="Petite" checked> Petite</label><br>
+  <label><input type="radio" name="contrat" value="Garde"> Garde</label><br>
+  <label><input type="radio" name="contrat" value="Garde Sans"> Garde Sans</label><br>
+  <label><input type="radio" name="contrat" value="Garde Contre"> Garde Contre</label><br>
+
+  <h3>Nombre de bouts (0 à 3) :</h3>
+  <input type="number" id="nbBouts" min="0" max="3" value="0">
+
+  <br><br>
+  <button type="button" onclick="lireContrat()">Valider</button>
+</form>
+
+<p id="resultat"></p>
+</div>
+
+<script src="../scripts/score.js" defer></script>
+
+</body>
+</html>

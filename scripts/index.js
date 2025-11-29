@@ -1,0 +1,48 @@
+document.getElementById('validateCount').addEventListener('click', () => {
+    const count = parseInt(document.getElementById('playerCount').value, 10);
+    if (!count || count < 1) return;
+
+    const step2 = document.getElementById('step2');
+    step2.innerHTML = '<h2>Noms des joueurs :</h2>';
+
+    for (let i = 1; i <= count; i++) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = `Nom du joueur ${i}`;
+        input.id = `player${i}`;
+        input.required = true; // impose une saisie
+        step2.appendChild(input);
+        step2.appendChild(document.createElement('br'));
+    }
+
+    const btn = document.createElement('button');
+    btn.textContent = 'Confirmer';
+
+    btn.addEventListener('click', () => {
+        const names = [];
+        let valid = true;
+
+        for (let i = 1; i <= count; i++) {
+            const value = document.getElementById(`player${i}`).value.trim();
+
+            if (value === "") {
+                alert(`⚠️ Le nom du joueur ${i} ne peut pas être vide !`);
+                valid = false;
+                break;
+            }
+
+            names.push(value);
+        }
+
+        if (!valid) return;
+
+        // Stockage des noms pour la prochaine page
+        localStorage.setItem("playerNames", JSON.stringify(names));
+
+        window.location.href = "html/partie.html";
+
+    });
+
+    step2.appendChild(btn);
+    step2.style.display = 'block';
+});
