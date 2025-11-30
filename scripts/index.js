@@ -1,6 +1,6 @@
 document.getElementById('validateCount').addEventListener('click', () => {
     const count = parseInt(document.getElementById('playerCount').value, 10);
-    if (!count || count < 1) return;
+    if (!count || count < 3 || count >8) return;
 
     const step2 = document.getElementById('step2');
     step2.innerHTML = '<h2>Noms des joueurs :</h2>';
