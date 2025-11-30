@@ -6,7 +6,7 @@ padding: 20px;
 
 
 #app {
-max-width: 400px;
+width: 90%;
 margin: auto;
 background: #6ba5a0;
 padding: 20px;
@@ -18,5 +18,5 @@ box-shadow: 0 0 10px rgba(0,0,0,0.1);
 input {
 margin: 5px 0;
 padding: 5px;
-width: 100%;
+width: 25%;
 }
