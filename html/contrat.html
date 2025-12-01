@@ -4,18 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Nouvelle Partie</title>
-<link rel="stylesheet" href="../css/score.css">
+<link rel="stylesheet" href="../css/contrat.css">
 </head>
 <body>
 
 <div id="preneur"></div>
 <div id="contrat">
 <form id="formContrat">
-  <label><input type="radio" name="contrat" value="Petite" checked> Petite</label>
-  <label><input type="radio" name="contrat" value="Garde"> Garde</label>
-  <label><input type="radio" name="contrat" value="Garde Sans"> Garde Sans</label>
-  <label><input type="radio" name="contrat" value="Garde Contre"> Garde Contre</label>
-  <br><br>
+    <label>Prise :
+    <select id="prise">
+      <option value="petite">Petite</option>
+      <option value="garde">Garde</option>
+      <option value="gardesans">Garde Sans</option>
+      <option value="gardecontre">Garde Contre</option>
+    </select>
+  </label>
+ <br><br>
   <!-- Demander le nombre de bouts, une valeur entre 0 et 3 -->
   <label>Nombre de bouts (0 à 3) : <input type="number" id="nbBouts" min="0" max="3" value="0"></label>
   <br><br>
@@ -25,6 +29,16 @@
   <!-- un des joueurs a t-il mené le petit au bout-->
   <div id="petitaubout"></div>
   <br>
+  <!-- chelem: "Annoncé et passé", "Non annoncé et passé" ou "Annoncé et chuté"-->
+  <label>Chelem :
+    <select id="chelem">
+      <option value="aucun">Aucun</option>
+      <option value="annoncePasse">Annoncé et passé</option>
+      <option value="nonAnnoncePasse">Non annoncé et passé</option>
+      <option value="annonceChute">Annoncé et chuté</option>
+    </select>
+  </label>
+  <br><br> 
   <!-- Boutons pour valider le contrat -->
   <button type="button" onclick="lireContrat()">Valider</button>
 </form>
@@ -32,7 +46,7 @@
 <p id="resultat"></p>
 </div>
 
-<script src="../scripts/score.js" defer></script>
+<script src="../scripts/contrat.js" defer></script>
 
 </body>
 </html>

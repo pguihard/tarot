@@ -32,5 +32,5 @@ document.getElementById("validerPreneur").addEventListener("click", () => {
   // Stockage des noms pour la prochaine page
   localStorage.setItem("preneur", JSON.stringify(preneur));
 
-  window.location.href = "score.html";
+  window.location.href = "contrat.html";
 });
