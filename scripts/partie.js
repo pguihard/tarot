@@ -2,7 +2,7 @@ const playerNames = JSON.parse(localStorage.getItem("playerNames")) || [];
 
 const display = document.getElementById('players');
 display.innerHTML = `
-  <h2>Joueurs :</h2>
+  <h4>Qui est le preneur :</h4>
   <form id="choixPreneur">
     <ul>
       ${playerNames
@@ -18,7 +18,7 @@ display.innerHTML = `
         .join('')}
     </ul>
 
-    <button type="button" id="validerPreneur">Valider le preneur</button>
+    <button type="button" id="validerPreneur">Valider</button>
   </form>
 `;
 document.getElementById("validerPreneur").addEventListener("click", () => {

@@ -9,7 +9,6 @@ display1.innerHTML = `
 const playerNames = JSON.parse(localStorage.getItem("playerNames")) || [];
 
 const display2 = document.getElementById('petitaubout');
-//Ajouter la possibilité de ne choisir aucun des joueurs
 
 display2.innerHTML = `
   <h4>Qui a mené le petit au bout :</h4>
@@ -31,6 +30,27 @@ display2.innerHTML = `
  </form>
 `;
 
+//Dans la division id="annonces", ajouter 5 cases à cocher pour chaque joueur intitulées "Poignée simple", "Poignée double", "Poignée triple", "Misère de tête" et "Misère d'atout"
+const display3 = document.getElementById('annonces');
+
+display3.innerHTML = `
+  <h4>Annonces des joueurs :</h4>
+  ${playerNames
+    .map(
+      (name) => `
+        <div>
+          <h4>${name} :</h4>
+          <label><input type="radio" name="${name}_poignee" value="aucune_poignee"> Aucune Poignée</label>
+          <label><input type="radio" name="${name}_poignee" value="poignee_simple"> Poignée simple</label><br>
+          <label><input type="radio" name="${name}_poignee" value="poignee_double"> Poignée double</label>
+          <label><input type="radio" name="${name}_poignee" value="poignee_triple"> Poignée triple</label><br>
+          <label><input type="checkbox" name="${name}_misere_tete" value="misere_tete"> Misère de tête</label>
+          <label><input type="checkbox" name="${name}_misere_atout" value="misere_atout"> Misère d'atout</label>
+        </div>
+      `
+    )
+    .join('')}
+`;
 function lireContrat() {
     // Récupère la prise sélectionné
     const prise = document.getElementById("prise").value;

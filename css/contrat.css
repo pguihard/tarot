@@ -20,3 +20,11 @@ padding: 20px;
 border-radius: 8px;
 box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+#annonces {
+width: 90%;
+margin: auto;
+background: #a5a46b;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
