@@ -8,20 +8,24 @@
 </head>
 <body>
 
-<div id="preneur">
-  <h1>score</h1>
-</div>
+<div id="preneur"></div>
 <div id="contrat">
 <form id="formContrat">
-  <label><input type="radio" name="contrat" value="Petite" checked> Petite</label><br>
-  <label><input type="radio" name="contrat" value="Garde"> Garde</label><br>
-  <label><input type="radio" name="contrat" value="Garde Sans"> Garde Sans</label><br>
-  <label><input type="radio" name="contrat" value="Garde Contre"> Garde Contre</label><br>
-
-  <h1>Nombre de bouts (0 à 3) :</h1>
-  <input type="number" id="nbBouts" min="0" max="3" value="0">
-
+  <label><input type="radio" name="contrat" value="Petite" checked> Petite</label>
+  <label><input type="radio" name="contrat" value="Garde"> Garde</label>
+  <label><input type="radio" name="contrat" value="Garde Sans"> Garde Sans</label>
+  <label><input type="radio" name="contrat" value="Garde Contre"> Garde Contre</label>
   <br><br>
+  <!-- Demander le nombre de bouts, une valeur entre 0 et 3 -->
+  <label>Nombre de bouts (0 à 3) : <input type="number" id="nbBouts" min="0" max="3" value="0"></label>
+  <br><br>
+  <!-- Demander le nombre de points réalisés, une valeur entre 0 et 91 -->
+  <label> Nombre de points réalisés (0 à 91) : <input type="number" id="nbPoints" min="0" max="91" value="0"></label>
+  <br>
+  <!-- un des joueurs a t-il mené le petit au bout-->
+  <div id="petitaubout"></div>
+  <br>
+  <!-- Boutons pour valider le contrat -->
   <button type="button" onclick="lireContrat()">Valider</button>
 </form>
 
