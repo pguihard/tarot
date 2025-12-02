@@ -27,6 +27,6 @@ function calculScore() {
     }
     // Affiche le résultat
     document.getElementById("resultat").innerHTML =
-            prise + ", " + nbBouts + " bouts, " + nbPoints + " points, chelem: " + chelem + ", petit au bout: " + petitAuBout;
+            prise + ", " + nbBouts + " bouts, " + nbPoints + " points, petit au bout: " + petitAuBout + ", chelem: " + chelem  ;
 
 }
