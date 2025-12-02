@@ -11,28 +11,18 @@ const playerNames = JSON.parse(localStorage.getItem("playerNames")) || [];
 const display2 = document.getElementById('petitaubout');
 
 display2.innerHTML = `
-  <h4>Qui a mené le petit au bout :</h4>
-<form id="choixPreneur">
-      <label>
-        <input type="radio" name="petitaubout" value="" checked>
-        Aucun
-      </label>
+  <label>Petit au bout  : 
+<select id="choixPreneur">
+      <option value="Non">Aucun</option>
     ${playerNames
-      .map(
-        (name) => `
-            <label>
-              <input type="radio" name="petitaubout" value="${name}">
-              ${name}
-            </label>
-      `
-      )
+      .map((name) => `<option value="${name}">${name}</option>`)
       .join('')}
- </form>
+</select>
+</label>
 `;
 
 //Dans la division id="annonces", ajouter 5 cases à cocher pour chaque joueur intitulées "Poignée simple", "Poignée double", "Poignée triple", "Misère de tête" et "Misère d'atout"
 const display3 = document.getElementById('annonces');
-
 display3.innerHTML = `
   <h4>Annonces des joueurs :</h4>
   ${playerNames
@@ -40,10 +30,14 @@ display3.innerHTML = `
       (name) => `
         <div>
           <h4>${name} :</h4>
-          <label><input type="radio" name="${name}_poignee" value="aucune_poignee"> Aucune Poignée</label>
-          <label><input type="radio" name="${name}_poignee" value="poignee_simple"> Poignée simple</label><br>
-          <label><input type="radio" name="${name}_poignee" value="poignee_double"> Poignée double</label>
-          <label><input type="radio" name="${name}_poignee" value="poignee_triple"> Poignée triple</label><br>
+          <label>Poignée :</label>
+          <select id="${name}_poignee">
+            <option value="aucune_poignee">0</option>
+            <option value="poignee_simple">10</option>
+            <option value="poignee_double">13</option>
+            <option value="poignee_triple">15</option>
+          </select>
+          <br>
           <label><input type="checkbox" name="${name}_misere_tete" value="misere_tete"> Misère de tête</label>
           <label><input type="checkbox" name="${name}_misere_atout" value="misere_atout"> Misère d'atout</label>
         </div>
@@ -51,29 +45,3 @@ display3.innerHTML = `
     )
     .join('')}
 `;
-function lireContrat() {
-    // Récupère la prise sélectionné
-    const prise = document.getElementById("prise").value;
-    // Récupère le nombre de bouts
-    var nbBouts = parseInt(document.getElementById("nbBouts").value, 10);
-    // Vérification du nombre de bouts
-    if (isNaN(nbBouts) || nbBouts < 0 || nbBouts > 3) {
-        document.getElementById("resultat").innerHTML =
-            "Erreur : le nombre de bouts doit être entre 0 et 3.";
-        return;
-    }
-    // Récupère le nombre de points réalisés
-    var nbPoints = parseInt(document.getElementById("nbPoints").value, 10);
-    // Vérification du nombre de points
-    if (isNaN(nbPoints) || nbPoints < 0 || nbPoints > 91) {
-        document.getElementById("resultat").innerHTML =
-            "Erreur : le nombre de points réalisés doit être entre 0 et 91.";
-        return;
-    }
-    // Récupère le chelem sélectionné
-    const chelem = document.getElementById("chelem").value;
-    // Affiche le résultat
-    document.getElementById("resultat").innerHTML =
-            prise + ", " + nbBouts + " bouts, " + nbPoints + " points, chelem: " + chelem;
-
-}    

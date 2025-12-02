@@ -10,6 +10,7 @@
 
 <div id="preneur"></div>
 <div id="contrat">
+<h4>Contrat :</h4>
 <form id="formContrat">
     <label>Prise :
     <select id="prise">
@@ -21,11 +22,11 @@
   </label>
  <br><br>
   <!-- Demander le nombre de bouts, une valeur entre 0 et 3 -->
-  <label>Nombre de bouts (0 à 3) : <input type="number" id="nbBouts" min="0" max="3" value="0"></label>
+  <label>Nombre de bouts   : <input type="number" id="nbBouts" min="0" max="3" value="0"></label>
   <br><br>
   <!-- Demander le nombre de points réalisés, une valeur entre 0 et 91 -->
-  <label> Nombre de points réalisés (0 à 91) : <input type="number" id="nbPoints" min="0" max="91" value="0"></label>
-  <br>
+  <label> Nombre de points : <input type="number" id="nbPoints" min="0" max="91" value="0"></label>
+  <br><br>
   <!-- un des joueurs a t-il mené le petit au bout-->
   <div id="petitaubout"></div>
   <br>
@@ -46,11 +47,11 @@
 
 <div id="calculer">
     <!-- Boutons pour valider le contrat -->
-  <button type="button" onclick="lireContrat()">Valider</button>
+  <button type="button" onclick="calculScore()">Calcul du score</button>
   <p id="resultat"></p>
 </div>
-
 <script src="../scripts/contrat.js" defer></script>
+<script src="../scripts/calcul.js" defer></script>
 
 </body>
 </html>
