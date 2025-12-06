@@ -6,17 +6,16 @@ display1.innerHTML = `
   <h4>Preneur : ${preneur}</h4>
 `;
 
-const playerNames = JSON.parse(localStorage.getItem("playerNames")) || [];
+const playerNames = JSON.parse(localStorage.getItem("playerNames"));
 
 const display2 = document.getElementById('petitaubout');
 
 display2.innerHTML = `
   <label>Petit au bout  : 
 <select id="choixPreneur">
-      <option value="Non">Aucun</option>
-    ${playerNames
-      .map((name) => `<option value="${name}">${name}</option>`)
-      .join('')}
+  <option value="Non">Non</option>
+  <option value="Preneur">Preneur</option>
+  <option value="Defense">Defense</option>
 </select>
 </label>
 `;
