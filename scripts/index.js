@@ -1,4 +1,10 @@
 document.getElementById('validateCount').addEventListener('click', () => {
+    // Initialisation du stockage local pour un tableau de scores
+    localStorage.setItem("scoresTab", JSON.stringify([]));
+    // Initialisation du stockage local pour le numéro de la manche
+    localStorage.setItem("roundNumber", "1");
+
+    // Récupération du nombre de joueurs
     const count = parseInt(document.getElementById('playerCount').value, 10);
     if (!count || count < 3 || count >8) return;
 
@@ -33,16 +39,11 @@ document.getElementById('validateCount').addEventListener('click', () => {
 
             names.push(value);
         }
-
         if (!valid) return;
-
         // Stockage des noms pour la prochaine page
         localStorage.setItem("playerNames", JSON.stringify(names));
-
         window.location.href = "html/partie.html";
-
     });
-
     step2.appendChild(btn);
     step2.style.display = 'block';
 });

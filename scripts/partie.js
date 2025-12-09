@@ -1,4 +1,4 @@
-const playerNames = JSON.parse(localStorage.getItem("playerNames")) || [];
+const playerNames = JSON.parse(localStorage.getItem("playerNames"));
 
 const display = document.getElementById('players');
 display.innerHTML = `
@@ -31,6 +31,7 @@ document.getElementById("validerPreneur").addEventListener("click", () => {
   }
   // Stockage des noms pour la prochaine page
   localStorage.setItem("preneur", JSON.stringify(preneur));
+  localStorage.setItem("scores", JSON.stringify([]));
 
   window.location.href = "contrat.html";
 });

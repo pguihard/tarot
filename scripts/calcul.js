@@ -71,7 +71,10 @@ console.log("Gain: ", gain);
     return gain;
 }
 function repartitionPoints(gain) {
+    // Récupérer les noms des joueurs
     const playerNames = JSON.parse(localStorage.getItem("playerNames"));
+    // Récupérer le numéro de la manche
+    const roundNumber = parseInt(localStorage.getItem("roundNumber"), 10);
     // Récuperer le nombre de joueurs
     const numPlayers = playerNames.length;
     const pointsPreneur = gain * (numPlayers - 1);
@@ -88,11 +91,11 @@ function repartitionPoints(gain) {
         } else {
             points = pointsDefense;
         }
-        scores.push({ name: name, score: points });
+        scores.push({manche: roundNumber, name: name, score: points });
     });
     return scores;
 }
-     function calculScore() {
+     function calculScores() {
     // Récupère la prise sélectionné
     const prise = document.getElementById("prise").value;
     // Récupère le nombre de bouts
@@ -117,8 +120,62 @@ function repartitionPoints(gain) {
     const petitAuBout = document.getElementById("choixPreneur").value;
 
     // Affiche le résultat
- 
     const gain = calculGain(prise, nbBouts, nbPoints, petitAuBout, chelem);
-    const scores = repartitionPoints(gain);
-    document.getElementById("resultat").innerHTML = scores.map(s => `${s.name} : ${s.score} points`).join(", ");
+    let scores =  repartitionPoints(gain);
+    // Une boucle pour afficher les scores
+    const roundNumber = parseInt(localStorage.getItem("roundNumber"), 10);
+    localStorage.setItem("scores", JSON.stringify(scores));
+
+    // Afficher les scores des joueurs ET un passage à la ligne à la fin    
+    document.getElementById("resultat").innerHTML = "Manche : " + roundNumber + " " + scores.map(s => `${s.name} : ${s.score} points`).join(", ");
+}
+function sauvegardeScores() {
+    // Ajouter les nouveaux scores aux scores existants
+    const existingScores = JSON.parse(localStorage.getItem("scoresTab"));
+
+    const newScores = JSON.parse(localStorage.getItem("scores"));
+
+    // Fusionner les deux tableaux de scores
+    const mergedScores = existingScores.concat(newScores);
+    // Stocker localement les scores
+    localStorage.setItem("scoresTab", JSON.stringify(mergedScores));
+    // Afficher les scores de scoreTab dans l'element resultat
+    Scores = JSON.parse(localStorage.getItem("scoresTab"));
+    document.getElementById("resultat").innerHTML = "Scores sauvegardés : " + JSON.stringify(Scores);
+    console.log(Scores, typeof Scores);
+    // Incrémenter le numéro de la manche
+    const roundNumber = parseInt(localStorage.getItem("roundNumber"), 10) + 1;
+console.log("Avant stockage roundNumber :", roundNumber);
+    localStorage.setItem("roundNumber", JSON.stringify(roundNumber));
+
+    exportScoresToCSV();
+    // Rediriger vers la page d'accueil ou une autre page
+    window.location.href = "partie.html";
+}
+function exportScoresToCSV() {
+    const scores = JSON.parse(localStorage.getItem("scoresTab"));
+    const playerNames = JSON.parse(localStorage.getItem("playerNames"));
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Manche," + playerNames.join(",") + "\n";
+    const rounds = {};
+    scores.forEach(entry => {
+        if (!rounds[entry.manche]) {
+            rounds[entry.manche] = {};
+        }
+        rounds[entry.manche][entry.name] = entry.score;
+    });
+    for (const manche in rounds) {
+        const row = [manche];
+        playerNames.forEach(name => {
+            row.push(rounds[manche][name] || 0);
+        });
+        csvContent += row.join(",") + "\n";
+    }
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "scores_tarot.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
