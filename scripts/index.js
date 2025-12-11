@@ -3,6 +3,8 @@ document.getElementById('validateCount').addEventListener('click', () => {
     localStorage.setItem("scoresTab", JSON.stringify([]));
     // Initialisation du stockage local pour le numéro de la manche
     localStorage.setItem("roundNumber", "1");
+    // Initialisation du stockage local pour un total des scores par joueur
+    localStorage.setItem("totalScores", JSON.stringify([]));
 
     // Récupération du nombre de joueurs
     const count = parseInt(document.getElementById('playerCount').value, 10);
@@ -42,6 +44,10 @@ document.getElementById('validateCount').addEventListener('click', () => {
         if (!valid) return;
         // Stockage des noms pour la prochaine page
         localStorage.setItem("playerNames", JSON.stringify(names));
+        // Stockage des scores totaux initialisés à 0 pour chaque joueur
+        const totalScores = names.map(() => 0);
+        localStorage.setItem("totalScores", JSON.stringify(totalScores));
+        // Redirection vers la page partie.html
         window.location.href = "html/partie.html";
     });
     step2.appendChild(btn);

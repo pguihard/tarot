@@ -125,7 +125,6 @@ function repartitionPoints(gain) {
     // Une boucle pour afficher les scores
     const roundNumber = parseInt(localStorage.getItem("roundNumber"), 10);
     localStorage.setItem("scores", JSON.stringify(scores));
-
     // Afficher les scores des joueurs ET un passage à la ligne à la fin    
     document.getElementById("resultat").innerHTML = "Manche : " + roundNumber + " " + scores.map(s => `${s.name} : ${s.score} points`).join(", ");
 }
@@ -147,8 +146,21 @@ function sauvegardeScores() {
     const roundNumber = parseInt(localStorage.getItem("roundNumber"), 10) + 1;
 console.log("Avant stockage roundNumber :", roundNumber);
     localStorage.setItem("roundNumber", JSON.stringify(roundNumber));
+    // Mettre à jour le total des scores par joueur
+    const totalScores = JSON.parse(localStorage.getItem("totalScores"));
+    const playerNames = JSON.parse(localStorage.getItem("playerNames"));
+    newScores.forEach((entry) => {
+        const playerIndex = playerNames.indexOf(entry.name);
+        if (playerIndex !== -1) {
+            totalScores[playerIndex] += entry.score;
+        }
+    });
+    localStorage.setItem("totalScores", JSON.stringify(totalScores));
+    console.log("Total des scores mis à jour :", totalScores);
 
-    exportScoresToCSV();
+    //exportScoresToCSV();
+
+
     // Rediriger vers la page d'accueil ou une autre page
     window.location.href = "partie.html";
 }

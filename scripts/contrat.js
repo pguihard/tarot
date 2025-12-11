@@ -1,6 +1,9 @@
 const preneur = JSON.parse(localStorage.getItem("preneur"))
 console.log("score.js: Preneur sélectionné :", preneur);
 
+const totalScores = JSON.parse(localStorage.getItem("totalScores"));
+console.log("Total des scores mis à jour :", totalScores);
+
 const display1 = document.getElementById('preneur');
 display1.innerHTML = `
   <h4>Preneur : ${preneur}</h4>
