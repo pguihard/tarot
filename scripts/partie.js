@@ -38,10 +38,43 @@ document.getElementById("validerPreneur").addEventListener("click", () => {
   window.location.href = "contrat.html";
 });
 
+// Affichage des scores
+const scoresDiv = document.getElementById("scores");
+const scoresTab = JSON.parse(localStorage.getItem("scoresTab")) || [];
+let scoresHTML = "<h3>Scores actuels :</h3><table border='1'><tr><th>Manche</th>";
+playerNames.forEach(name => {
+  scoresHTML += `<th>${name}</th>`;
+});
+scoresHTML += "</tr>";
+
+const rounds = {};
+scoresTab.forEach(entry => {
+    if (!rounds[entry.manche]) {
+        rounds[entry.manche] = {};
+    }
+    rounds[entry.manche][entry.name] = entry.score;
+});
+for (const manche in rounds) {
+    scoresHTML += `<tr><td>${manche}</td>`;
+    playerNames.forEach(name => {
+        scoresHTML += `<td>${rounds[manche][name] || 0}</td>`;
+    });
+    scoresHTML += "</tr>";
+}
+// Ajouter une dernière ligne pour les totaux
+const totalScores = JSON.parse(localStorage.getItem("totalScores")) || [];
+scoresHTML += `<tr><td>Total</td>`;
+totalScores.forEach(total => {
+    scoresHTML += `<td>${total}</td>`;
+});
+scoresHTML += "</tr>";
+
+scoresHTML += "</table>";
+scoresDiv.innerHTML = scoresHTML;
 // finPartie 
 document.getElementById("finPartie").addEventListener("click", () => {
   exportScoresToCSV();
-  window.location.href = "index.html";
+  window.location.href = "../index.html";
 });
 
 function exportScoresToCSV() {
