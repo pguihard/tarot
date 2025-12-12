@@ -164,30 +164,4 @@ console.log("Avant stockage roundNumber :", roundNumber);
     // Rediriger vers la page d'accueil ou une autre page
     window.location.href = "partie.html";
 }
-function exportScoresToCSV() {
-    const scores = JSON.parse(localStorage.getItem("scoresTab"));
-    const playerNames = JSON.parse(localStorage.getItem("playerNames"));
-    let csvContent = "data:text/csv;charset=utf-8,";
-    csvContent += "Manche," + playerNames.join(",") + "\n";
-    const rounds = {};
-    scores.forEach(entry => {
-        if (!rounds[entry.manche]) {
-            rounds[entry.manche] = {};
-        }
-        rounds[entry.manche][entry.name] = entry.score;
-    });
-    for (const manche in rounds) {
-        const row = [manche];
-        playerNames.forEach(name => {
-            row.push(rounds[manche][name] || 0);
-        });
-        csvContent += row.join(",") + "\n";
-    }
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "scores_tarot.csv");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
+
