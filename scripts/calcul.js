@@ -52,8 +52,8 @@ console.log("Gain: ", gain);
         if (misereAtoutCheckbox && misereAtoutCheckbox.checked) {
             poigneePoints += 10;
         }
-                // Vérifier si le joueur est le preneur et a perdu ou bien s'il est défenseur
-        if ((name === preneur && differencePoints < 0) || (name !== preneur)) {
+        // Vérifier si le joueur est le preneur et a perdu ou bien s'il est défenseur
+        if ( differencePoints < 0 ) {
             poigneePoints *= -1;
         }
         gain += poigneePoints;
@@ -155,12 +155,10 @@ console.log("Avant stockage roundNumber :", roundNumber);
             totalScores[playerIndex] += entry.score;
         }
     });
+    /*
     localStorage.setItem("totalScores", JSON.stringify(totalScores));
     console.log("Total des scores mis à jour :", totalScores);
-
-    //exportScoresToCSV();
-
-
+    */
     // Rediriger vers la page d'accueil ou une autre page
     window.location.href = "partie.html";
 }
