@@ -95,7 +95,7 @@ function repartitionPoints(gain) {
     });
     return scores;
 }
-     function calculScores() {
+function calculScores() {
     // Récupère la prise sélectionné
     const prise = document.getElementById("prise").value;
     // Récupère le nombre de bouts
@@ -155,10 +155,7 @@ console.log("Avant stockage roundNumber :", roundNumber);
             totalScores[playerIndex] += entry.score;
         }
     });
-    /*
     localStorage.setItem("totalScores", JSON.stringify(totalScores));
-    console.log("Total des scores mis à jour :", totalScores);
-    */
     // Rediriger vers la page d'accueil ou une autre page
     window.location.href = "partie.html";
 }
