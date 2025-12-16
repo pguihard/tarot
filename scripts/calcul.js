@@ -15,7 +15,6 @@ function calculGain(prise, nbBouts, nbPoints, petitAuBout, chelem) {
     const differencePoints = nbPoints - scoreMinRequis;
     // Calculer le multiplicateur en fonction de la différence de points
     let gain = (Math.abs(differencePoints) + 25) * facteurMulti[prise] * (differencePoints >= 0 ? 1 : -1);
-console.log("Gain: ", gain);    
     // Ajouter les points pour le petit au bout
     if (petitAuBout === "Preneur") {
         gain += 10 * facteurMulti[prise];
@@ -71,12 +70,39 @@ console.log("Gain: ", gain);
     return gain;
 }
 function repartitionPoints(gain) {
+    console.log("Gain: ", gain);    
+    // récupérer le nom du joueur appelé
+    const appele = JSON.parse(localStorage.getItem("appele"));
     // Récupérer les noms des joueurs
     const playerNames = JSON.parse(localStorage.getItem("playerNames"));
     // Récupérer le numéro de la manche
     const roundNumber = parseInt(localStorage.getItem("roundNumber"), 10);
     // Récuperer le nombre de joueurs
     const numPlayers = playerNames.length;
+    // Si numPlayers est 5 et appele est défini, le preneur et l'appelé gagnent ensemble
+    if (numPlayers === 5 && appele) {
+        const pointsPreneur = gain * 2;
+        const pointsAppele  = gain;
+        const pointsDefense = -gain;
+        const preneur = JSON.parse(localStorage.getItem("preneur"));
+        // Créer une liste pour stocker chaque joueur et son score
+        const scores = [];
+        playerNames.forEach((name, index) => {
+            // Stocker le score dans un tableau
+            if (name === preneur) {
+                points = pointsPreneur;
+            } 
+            else { 
+                if (name === appele) {points = pointsAppele;
+                   } 
+                   else {points = pointsDefense;
+                   }
+                }
+            scores.push({manche: roundNumber, name: name, score: points });
+        });
+        return scores;
+    }
+    // Calculer les points normalement
     const pointsPreneur = gain * (numPlayers - 1);
     const pointsDefense = -gain;
  
@@ -95,6 +121,7 @@ function repartitionPoints(gain) {
     });
     return scores;
 }
+// On click button
 function calculScores() {
     // Récupère la prise sélectionné
     const prise = document.getElementById("prise").value;
@@ -128,6 +155,7 @@ function calculScores() {
     // Afficher les scores des joueurs ET un passage à la ligne à la fin    
     document.getElementById("resultat").innerHTML = "Manche : " + roundNumber + " " + scores.map(s => `${s.name} : ${s.score} points`).join(", ");
 }
+// On click button
 function sauvegardeScores() {
     // Ajouter les nouveaux scores aux scores existants
     const existingScores = JSON.parse(localStorage.getItem("scoresTab"));

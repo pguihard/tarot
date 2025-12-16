@@ -50,13 +50,20 @@ if (numberOfPlayers === 5) {
 document.getElementById("validerPreneur").addEventListener("click", () => {
   const form = document.getElementById("choixPreneur");
   const preneur = form.preneur.value;
+  const form2 = document.getElementById("choixAppele");
+  const appele = form2.appele.value;
 
   if (!preneur) {
-    console.log("Pas de Preneur sélectionné :", preneur);
+    console.log("Pas de Preneur sélectionné.");
+    return;
+  }
+  if (!appele) {
+    console.log("Pas de joueur appelé sélectionné.");
     return;
   }
   // Stockage des noms pour la prochaine page
   localStorage.setItem("preneur", JSON.stringify(preneur));
+  localStorage.setItem("appele", JSON.stringify(appele));
   localStorage.setItem("scores", JSON.stringify([]));
 
   window.location.href = "contrat.html";
