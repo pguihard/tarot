@@ -23,6 +23,30 @@ display.innerHTML = `
   </form>
 `;
 
+// cas de 5 joueurs, fonction affichage du joueur appelé dans la division calledplayer
+const calledPlayerDiv = document.getElementById('calledplayer');
+const numberOfPlayers = playerNames.length;
+if (numberOfPlayers === 5) {
+    calledPlayerDiv.innerHTML = `
+    <h4>Qui est l'appelé :</h4>
+    <form id="choixAppele">
+      <ul>
+        ${playerNames
+          .map(
+            (name) => `
+              <li>
+                <label>
+                  <input type="radio" name="appele" value="${name}">
+                  ${name}
+                </label>
+              </li>`
+          )
+          .join('')}
+      </ul>
+    </form>
+  `;
+};
+
 document.getElementById("validerPreneur").addEventListener("click", () => {
   const form = document.getElementById("choixPreneur");
   const preneur = form.preneur.value;
@@ -108,3 +132,4 @@ function exportScoresToCSV() {
   link.click();
   document.body.removeChild(link);
 }
+// finPartie

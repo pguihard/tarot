@@ -4,7 +4,7 @@ background: #f9fafa;
 padding: 20px;
 }
 
-#players {
+#radios-container {
 width: 90%;
 margin: auto;
 background: #6ba5a0;
@@ -20,4 +20,9 @@ background: #71bb84;
 padding: 20px;
 border-radius: 8px;
 box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#radios-container {
+  display: flex;
+  gap: 40px;
 }
