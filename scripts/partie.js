@@ -2,7 +2,7 @@ const playerNames = JSON.parse(localStorage.getItem("playerNames"));
 
 const display = document.getElementById('players');
 display.innerHTML = `
-  <h4>Qui est le preneur :</h4>
+  <h4>Le preneur:</h4>
   <form id="choixPreneur">
     <ul>
       ${playerNames
@@ -28,7 +28,7 @@ const calledPlayerDiv = document.getElementById('calledplayer');
 const numberOfPlayers = playerNames.length;
 if (numberOfPlayers === 5) {
     calledPlayerDiv.innerHTML = `
-    <h4>Qui est l'appelé :</h4>
+    <h4>Le joueur appelé:</h4>
     <form id="choixAppele">
       <ul>
         ${playerNames
