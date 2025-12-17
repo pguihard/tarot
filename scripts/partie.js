@@ -18,8 +18,8 @@ display.innerHTML = `
         .join('')}
     </ul>
 
-    <button type="button" id="validerPreneur">Valider</button>
-    <button type="button" id="finPartie">Fin et sauvegarde des scores</button>
+    <button type="button" id="validerPreneur">Valider</button><br><br>
+    <button type="button" id="finPartie">Terminer</button>
   </form>
 `;
 

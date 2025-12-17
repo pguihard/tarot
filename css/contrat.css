@@ -36,3 +36,10 @@ padding: 20px;
 border-radius: 8px;
 box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+#calculScore, #nouvellePartie {
+  width: 40%;
+  margin: auto;
+  background: #c1bcc5;
+  padding: 5px;
+  border-radius: 8px;
+}

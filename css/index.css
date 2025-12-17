@@ -20,3 +20,10 @@ margin: 5px 0;
 padding: 5px;
 width: 45%;
 }
+#validateCount {
+  width: 40%;
+  margin: auto;
+  background: #c1bcc5;
+  padding: 5px;
+  border-radius: 8px;
+}
