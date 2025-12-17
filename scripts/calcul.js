@@ -70,7 +70,6 @@ function calculGain(prise, nbBouts, nbPoints, petitAuBout, chelem) {
     return gain;
 }
 function repartitionPoints(gain) {
-    console.log("Gain: ", gain);    
     // récupérer le nom du joueur appelé
     const appele = JSON.parse(localStorage.getItem("appele"));
     // Récupérer les noms des joueurs
@@ -169,10 +168,8 @@ function sauvegardeScores() {
     // Afficher les scores de scoreTab dans l'element resultat
     Scores = JSON.parse(localStorage.getItem("scoresTab"));
     document.getElementById("resultat").innerHTML = "Scores sauvegardés : " + JSON.stringify(Scores);
-    console.log(Scores, typeof Scores);
     // Incrémenter le numéro de la manche
     const roundNumber = parseInt(localStorage.getItem("roundNumber"), 10) + 1;
-console.log("Avant stockage roundNumber :", roundNumber);
     localStorage.setItem("roundNumber", JSON.stringify(roundNumber));
     // Mettre à jour le total des scores par joueur
     const totalScores = JSON.parse(localStorage.getItem("totalScores"));

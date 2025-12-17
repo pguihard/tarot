@@ -51,14 +51,19 @@ document.getElementById("validerPreneur").addEventListener("click", () => {
   const form = document.getElementById("choixPreneur");
   const preneur = form.preneur.value;
   const form2 = document.getElementById("choixAppele");
-  const appele = form2.appele.value;
-
+  const appele = form2 ? form2.appele.value : null;
+  // Envoyer une alerte si le joueur preneur n'est pas sélectionné
   if (!preneur) {
-    console.log("Pas de Preneur sélectionné.");
+    alert("Veuillez sélectionner un joueur preneur.");
     return;
   }
-  if (!appele) {
-    console.log("Pas de joueur appelé sélectionné.");
+  // Envoyer une alerte si le joueur appelé n'est pas sélectionné dans le cas de 5 joueurs
+  if (numberOfPlayers === 5 && !appele) {
+    alert("Veuillez sélectionner un joueur appelé.");
+    return;
+  }
+  if (numberOfPlayers === 5 && preneur === appele) {
+    alert("Le preneur et l'appelé ne peuvent pas être le même joueur. Veuillez faire un autre choix.");
     return;
   }
   // Stockage des noms pour la prochaine page
