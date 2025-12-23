@@ -41,23 +41,12 @@ function calculGain(prise, nbBouts, nbPoints, petitAuBout, chelem) {
             default:
                 poigneePoints = 0;
         }
-        /*
-        // Vérifier si la misère de tête est cochée
-        const misereTeteCheckbox = document.querySelector(`input[name="${name}_misere_tete"]`);
-        if (misereTeteCheckbox && misereTeteCheckbox.checked) {
-            poigneePoints += 10;
-        }
-        // Vérifier si la misère d'atout est cochée
-        const misereAtoutCheckbox = document.querySelector(`input[name="${name}_misere_atout"]`);
-        if (misereAtoutCheckbox && misereAtoutCheckbox.checked) {
-            poigneePoints += 10;
-        }
         // Vérifier si le joueur est le preneur et a perdu ou bien s'il est défenseur
         if ( differencePoints < 0 ) {
             poigneePoints *= -1;
         }
         gain += poigneePoints;
-        */
+        
     });
 
     // Ajouter les points pour le chelem
@@ -127,7 +116,9 @@ function repartitionPoints(gain) {
     // ---------------------------------------------------------------------------------
     // Calculer les points normalement 3-4 joueurs ou 5 sans appelé
     const pointsPreneur = gain * (numPlayers - 1);
+console.log("Points preneur:", pointsPreneur);    
     const pointsDefense = -gain;
+console.log("Points défense:", pointsDefense);
  
     // Parcourir la liste de joueurs et afficher leurs points
     const preneur = JSON.parse(localStorage.getItem("preneur"));
@@ -143,12 +134,13 @@ console.log("Misereux:", misereux);
         } else {
             points = pointsDefense;
         }
-        
-        if (name === misereux) {
-            points += 10 * (numPlayers - 1);
-        }
-        else  {
-            points -= 10;
+        if (misereux) {
+            if (name === misereux) {
+                points += 10 * (numPlayers - 1);
+            }
+            else  {
+                points -= 10;
+            }
         }
         scores.push({manche: roundNumber, name: name, score: points });
     });
