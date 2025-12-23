@@ -41,6 +41,7 @@ function calculGain(prise, nbBouts, nbPoints, petitAuBout, chelem) {
             default:
                 poigneePoints = 0;
         }
+        /*
         // Vérifier si la misère de tête est cochée
         const misereTeteCheckbox = document.querySelector(`input[name="${name}_misere_tete"]`);
         if (misereTeteCheckbox && misereTeteCheckbox.checked) {
@@ -56,6 +57,7 @@ function calculGain(prise, nbBouts, nbPoints, petitAuBout, chelem) {
             poigneePoints *= -1;
         }
         gain += poigneePoints;
+        */
     });
 
     // Ajouter les points pour le chelem
@@ -69,6 +71,25 @@ function calculGain(prise, nbBouts, nbPoints, petitAuBout, chelem) {
 
     return gain;
 }
+// Fonction retourne le nom d'un miséreux ou null
+function getMisereuxName() {
+    const playerNames = JSON.parse(localStorage.getItem("playerNames"));
+    for (const name of playerNames) {
+        const misereTeteCheckbox = document.querySelector(
+            `input[name="${name}_misere_tete"]`     
+        );
+        if (misereTeteCheckbox?.checked) {
+            return name;
+        }
+        const misereAtoutCheckbox = document.querySelector(
+            `input[name="${name}_misere_atout"]`
+        );
+        if (misereAtoutCheckbox?.checked) {
+            return name;
+        }
+    }
+    return null;
+}
 function repartitionPoints(gain) {
     // récupérer le nom du joueur appelé
     const appele = JSON.parse(localStorage.getItem("appele"));
@@ -78,6 +99,8 @@ function repartitionPoints(gain) {
     const roundNumber = parseInt(localStorage.getItem("roundNumber"), 10);
     // Récuperer le nombre de joueurs
     const numPlayers = playerNames.length;
+    let points = 0
+    // ---------------------------------------------------------------------------------
     // Si numPlayers est 5 et appele est défini, le preneur et l'appelé gagnent ensemble
     if (numPlayers === 5 && appele) {
         const pointsPreneur = gain * 2;
@@ -101,7 +124,8 @@ function repartitionPoints(gain) {
         });
         return scores;
     }
-    // Calculer les points normalement
+    // ---------------------------------------------------------------------------------
+    // Calculer les points normalement 3-4 joueurs ou 5 sans appelé
     const pointsPreneur = gain * (numPlayers - 1);
     const pointsDefense = -gain;
  
@@ -109,12 +133,22 @@ function repartitionPoints(gain) {
     const preneur = JSON.parse(localStorage.getItem("preneur"));
     // Créer une liste pour stocker chaque joueur et son score
     const scores = [];
+    // Si un miséreux est défini, ajuster les points
+    const misereux = getMisereuxName();
+console.log("Misereux:", misereux);
     playerNames.forEach((name, index) => {
         // Stocker le score dans un tableau
         if (name === preneur) {
             points = pointsPreneur;
         } else {
             points = pointsDefense;
+        }
+        
+        if (name === misereux) {
+            points += 10 * (numPlayers - 1);
+        }
+        else  {
+            points -= 10;
         }
         scores.push({manche: roundNumber, name: name, score: points });
     });
@@ -184,4 +218,3 @@ function sauvegardeScores() {
     // Rediriger vers la page d'accueil ou une autre page
     window.location.href = "partie.html";
 }
-
